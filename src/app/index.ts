@@ -1,24 +1,31 @@
+import 'babylonjs-loaders'
 import '@babylonjs/core/Debug/debugLayer'
 import '@babylonjs/inspector'
-import '@babylonjs/loaders/glTF'
 import {
   Scene,
   ArcRotateCamera,
   Vector3,
+  Color3,
   HemisphericLight,
+  PointLight,
   Mesh,
   MeshBuilder,
-  SceneLoader
+  DirectionalLight,
+  GlowLayer
 } from '@babylonjs/core'
 import createEngine from './engineCreator'
-import chair from 'url:./assets/senatorChair.obj'
-
-console.log('chair: ', chair)
+import { addChair } from './chair'
+import showWorldAxis from './axis'
+import createLight from './light'
+import createSpotlight from './spotLight'
 
 class App {
   constructor() {
     const { engine, canvas } = createEngine()
     var scene = new Scene(engine)
+    scene.clearColor = Color3.Black()
+    showWorldAxis(100, scene)
+    var gl = new GlowLayer("glow", scene);
 
     var camera: ArcRotateCamera = new ArcRotateCamera(
       'Camera',
@@ -28,29 +35,39 @@ class App {
       Vector3.Zero(),
       scene
     )
+    camera.position = new Vector3(-15, 20, 60)
     camera.attachControl(canvas, true)
+
+    createLight(new Vector3(5, 10, 2), scene)
+    createLight(new Vector3(-10, 10, -4), scene)
+
+    // var directionalLight = new DirectionalLight("DirectionalLight", new Vector3(0, -1, 1), scene);
+    // // directionalLight.diffuse = new Color3(1, 1, );
+    // // directionalLight.specular = new Color3(0, 1, 0);
+
     const light1: HemisphericLight = new HemisphericLight(
       'light1',
-      new Vector3(1, 1, 0),
-      scene
-    )
-    const box: Mesh = MeshBuilder.CreateBox(
-      'box',
-      {
-        size: 1,
-        width: 1,
-        height: 1
-      },
+      new Vector3(0, -1, 1),
       scene
     )
 
-    SceneLoader.ImportMeshAsync('chair', chair).then((result) => {
-      result.meshes[1].position.x = 20
-      const myMesh1 = scene.getMeshByName('chair')
-      myMesh1.rotation.y = Math.PI / 2
-    }).catch((err) => {
-      console.error('error loading: ', err)
+    // const box: Mesh = MeshBuilder.CreateBox(
+    //   'box',
+    //   {
+    //     size: 2,
+    //     width: 2,
+    //     height: 2
+    //   },
+    //   scene
+    // )
+    // box.position = lightPosition
+
+    addChair(scene).then((chair) => {
+      camera.useFramingBehavior = true
+      camera.setTarget(chair.getChildMeshes()[0])
+      // createSpotlight(new Vector3(5, 10, 2), chair.position, scene)
     })
+    scene.debugLayer.show()
 
     // hide/show the Inspector
     window.addEventListener('keydown', (ev) => {
