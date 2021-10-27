@@ -1,0 +1,13 @@
+{
+  "name": "babylon-play",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Topper Bowers <topper@toppingdesign.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babylonjs/core": "^4.2.0",
+    "@babylonjs/inspector": "^4.2.0",
+    "parcel": "^2.0.0",
+    "typescript": "^4.4.4"
+  }
+}

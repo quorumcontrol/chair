@@ -1,0 +1,5 @@
+src/generated/*
+src/serviceWorker.ts
+public/
+src/types/contracts
+tailwind.config.js
