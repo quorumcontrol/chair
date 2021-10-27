@@ -11,7 +11,8 @@ import {
   Mesh,
   MeshBuilder,
   DirectionalLight,
-  GlowLayer
+  GlowLayer,
+  Animation
 } from '@babylonjs/core'
 import createEngine from './engineCreator'
 import { addChair } from './chair'
@@ -40,6 +41,8 @@ class App {
 
     createLight(new Vector3(5, 10, 2), scene)
     createLight(new Vector3(-10, 10, -4), scene)
+    createLight(new Vector3(10, -10, 4), scene)
+    // createLight(new Vector3(-10, 10, -4), scene)
 
     // var directionalLight = new DirectionalLight("DirectionalLight", new Vector3(0, -1, 1), scene);
     // // directionalLight.diffuse = new Color3(1, 1, );
@@ -65,6 +68,34 @@ class App {
     addChair(scene).then((chair) => {
       camera.useFramingBehavior = true
       camera.setTarget(chair.getChildMeshes()[0])
+
+      const frameRate = 10
+
+      const zRotate = new Animation("zRotate", "rotation.y", frameRate, Animation.ANIMATIONTYPE_FLOAT, Animation.ANIMATIONLOOPMODE_CYCLE);
+
+      const keyFrames = []; 
+  
+      keyFrames.push({
+          frame: 0,
+          value: 0
+      });
+  
+      keyFrames.push({
+          frame: frameRate * 300,
+          value: 180
+      });
+  
+      keyFrames.push({
+          frame: 600 * frameRate,
+          value: 0
+      });
+  
+      zRotate.setKeys(keyFrames);
+  
+      chair.animations.push(zRotate);
+  
+      scene.beginAnimation(chair, 0, 600 * frameRate, true);
+
       // createSpotlight(new Vector3(5, 10, 2), chair.position, scene)
     })
     scene.debugLayer.show()
