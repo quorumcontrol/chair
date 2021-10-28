@@ -69,32 +69,32 @@ class App {
       camera.useFramingBehavior = true
       camera.setTarget(chair.getChildMeshes()[0])
 
-      const frameRate = 10
+      // const frameRate = 10
 
-      const zRotate = new Animation("zRotate", "rotation.y", frameRate, Animation.ANIMATIONTYPE_FLOAT, Animation.ANIMATIONLOOPMODE_CYCLE);
+      // const zRotate = new Animation("zRotate", "rotation.y", frameRate, Animation.ANIMATIONTYPE_FLOAT, Animation.ANIMATIONLOOPMODE_CYCLE);
 
-      const keyFrames = []; 
+      // const keyFrames = []; 
   
-      keyFrames.push({
-          frame: 0,
-          value: 0
-      });
+      // keyFrames.push({
+      //     frame: 0,
+      //     value: 0
+      // });
   
-      keyFrames.push({
-          frame: frameRate * 300,
-          value: 180
-      });
+      // keyFrames.push({
+      //     frame: frameRate * 300,
+      //     value: 180
+      // });
   
-      keyFrames.push({
-          frame: 600 * frameRate,
-          value: 0
-      });
+      // keyFrames.push({
+      //     frame: 600 * frameRate,
+      //     value: 0
+      // });
   
-      zRotate.setKeys(keyFrames);
+      // zRotate.setKeys(keyFrames);
   
-      chair.animations.push(zRotate);
+      // chair.animations.push(zRotate);
   
-      scene.beginAnimation(chair, 0, 600 * frameRate, true);
+      // scene.beginAnimation(chair, 0, 600 * frameRate, true);
 
       // createSpotlight(new Vector3(5, 10, 2), chair.position, scene)
     })

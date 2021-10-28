@@ -51,7 +51,7 @@ export async function addChair(scene: Scene) {
   const results = await SceneLoader.ImportMeshAsync(
     '',
     '/assets/',
-    'HippoGriffe Chair.obj',
+    'HippoGriffe Chair Fixed.obj',
     scene
   )
   console.log('results: ', results)
@@ -61,19 +61,19 @@ export async function addChair(scene: Scene) {
   results.meshes.forEach((mesh) => {
     mesh.parent = chair
     switch(mesh.name) {
-      case 'HippoGriffe':
+      case 'HippoGriffe_Mesh.002':
         mesh.material = hippoGriffeTexture(scene)
         return
-      case 'Upholstery':
+      case 'Upholstery_Mesh':
         mesh.material = upholsteryTexture(scene)
         return
-      case 'Base':
+      case 'Base_Mesh.001':
         mesh.material = baseTexture(scene)
         return
     }
   })
 
-  chair.scaling = new Vector3(0.1, 0.1, 0.1)
+  // chair.scaling = new Vector3(0.1, 0.1, 0.1)
 
   return chair
 }
