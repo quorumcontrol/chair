@@ -25,7 +25,7 @@ class App {
     const { engine, canvas } = createEngine()
     var scene = new Scene(engine)
     scene.clearColor = Color3.Black()
-    showWorldAxis(100, scene)
+    // showWorldAxis(100, scene)
     var gl = new GlowLayer("glow", scene);
 
     var camera: ArcRotateCamera = new ArcRotateCamera(
@@ -36,13 +36,13 @@ class App {
       Vector3.Zero(),
       scene
     )
-    camera.position = new Vector3(-15, 20, 60)
+    camera.position = new Vector3(1, 3.5, -6)
     camera.attachControl(canvas, true)
 
     createLight(new Vector3(5, 10, 2), scene)
     createLight(new Vector3(-10, 10, -4), scene)
     createLight(new Vector3(10, -10, 4), scene)
-    // createLight(new Vector3(-10, 10, -4), scene)
+    createLight(new Vector3(-10, 10, -4), scene)
 
     // var directionalLight = new DirectionalLight("DirectionalLight", new Vector3(0, -1, 1), scene);
     // // directionalLight.diffuse = new Color3(1, 1, );
@@ -53,6 +53,8 @@ class App {
       new Vector3(0, -1, 1),
       scene
     )
+
+    light1.intensity = 0.6
 
     // const box: Mesh = MeshBuilder.CreateBox(
     //   'box',
@@ -68,37 +70,39 @@ class App {
     addChair(scene).then((chair) => {
       camera.useFramingBehavior = true
       camera.setTarget(chair.getChildMeshes()[0])
+      camera.zoomOnFactor = 2
+      camera.zoomOn(chair.getChildMeshes())
 
-      // const frameRate = 10
+      const frameRate = 10
 
-      // const zRotate = new Animation("zRotate", "rotation.y", frameRate, Animation.ANIMATIONTYPE_FLOAT, Animation.ANIMATIONLOOPMODE_CYCLE);
+      const zRotate = new Animation("zRotate", "rotation.y", frameRate, Animation.ANIMATIONTYPE_FLOAT, Animation.ANIMATIONLOOPMODE_CYCLE);
 
-      // const keyFrames = []; 
+      const keyFrames = []; 
   
-      // keyFrames.push({
-      //     frame: 0,
-      //     value: 0
-      // });
+      keyFrames.push({
+          frame: 0,
+          value: 0
+      });
   
-      // keyFrames.push({
-      //     frame: frameRate * 300,
-      //     value: 180
-      // });
+      keyFrames.push({
+          frame: frameRate * 300,
+          value: 180
+      });
   
-      // keyFrames.push({
-      //     frame: 600 * frameRate,
-      //     value: 0
-      // });
+      keyFrames.push({
+          frame: 600 * frameRate,
+          value: 0
+      });
   
-      // zRotate.setKeys(keyFrames);
+      zRotate.setKeys(keyFrames);
   
-      // chair.animations.push(zRotate);
+      chair.animations.push(zRotate);
   
-      // scene.beginAnimation(chair, 0, 600 * frameRate, true);
+      scene.beginAnimation(chair, 0, 600 * frameRate, true);
 
       // createSpotlight(new Vector3(5, 10, 2), chair.position, scene)
     })
-    scene.debugLayer.show()
+    // scene.debugLayer.show()
 
     // hide/show the Inspector
     window.addEventListener('keydown', (ev) => {
