@@ -19,6 +19,7 @@ function hippoGriffeTexture(scene:Scene) {
   myMaterial.diffuseTexture = new Texture("/assets/HippoGriffe_D [Gold and Dark Wood].png", scene);
   myMaterial.specularTexture = new Texture("/assets/HippoGriffe_S [Gold and Dark Wood].png", scene);
   myMaterial.bumpTexture = new Texture("/assets/HippoGriffe_N [Gold and Dark Wood].png", scene, false, true);
+  myMaterial.specularPower = 10
   // myMaterial.emissiveColor = new Color3(88,88,88)
   // myMaterial.emissiveTexture = new Texture("/assets/HippoGriffe_G [Gold and Dark Wood].png", scene);
   // myMaterial.ambientTexture = new Texture("/assets/HippoGriffe_G [Gold and Dark Wood].png", scene);

@@ -7,18 +7,12 @@ import {
   Vector3,
   Color3,
   HemisphericLight,
-  PointLight,
-  Mesh,
   MeshBuilder,
-  DirectionalLight,
   GlowLayer,
-  Animation
 } from '@babylonjs/core'
 import createEngine from './engineCreator'
 import { addChair } from './chair'
-import showWorldAxis from './axis'
 import createLight from './light'
-import createSpotlight from './spotLight'
 import qiDAOLogo from './qiDaoLogo'
 
 class App {
@@ -26,7 +20,6 @@ class App {
     const { engine, canvas } = createEngine()
     var scene = new Scene(engine)
     scene.clearColor = Color3.Black()
-    // showWorldAxis(100, scene)
     var gl = new GlowLayer('glow', scene)
 
     var camera: ArcRotateCamera = new ArcRotateCamera(
@@ -41,20 +34,21 @@ class App {
     camera.attachControl(canvas, true)
     // camera.position = new Vector3(0,3,3)
 
-    createLight(new Vector3(1, 3, 2), scene)
-    createLight(new Vector3(-1, 1, -2), scene)
-    createLight(new Vector3(1, -1, 2), scene)
-    createLight(new Vector3(-1, 1, -2), scene)
+    createLight(new Vector3(2, 1.5, 1), scene)
+    createLight(new Vector3(-1.5, 1.5, -2), scene)
+    // createLight(new Vector3(1, -1, 2), scene)
+    // createLight(new Vector3(-1, 1, -2), scene)
 
     // var directionalLight = new DirectionalLight("DirectionalLight", new Vector3(0, -1, 1), scene);
-    // // directionalLight.diffuse = new Color3(1, 1, );
-    // // directionalLight.specular = new Color3(0, 1, 0);
+    // directionalLight.diffuse = new Color3(1, 1, );
+    // directionalLight.specular = new Color3(0, 1, 0);
 
     const light1: HemisphericLight = new HemisphericLight(
       'light1',
-      new Vector3(0, -1, 1),
+      new Vector3(.25, 1, .25),
       scene
     )
+    light1.intensity = 2
 
     addChair(scene).then((chair) => {
       // camera.useFramingBehavior = true
