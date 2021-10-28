@@ -19,6 +19,7 @@ import { addChair } from './chair'
 import showWorldAxis from './axis'
 import createLight from './light'
 import createSpotlight from './spotLight'
+import qiDAOLogo from './qiDaoLogo'
 
 class App {
   constructor() {
@@ -26,7 +27,7 @@ class App {
     var scene = new Scene(engine)
     scene.clearColor = Color3.Black()
     // showWorldAxis(100, scene)
-    var gl = new GlowLayer("glow", scene);
+    var gl = new GlowLayer('glow', scene)
 
     var camera: ArcRotateCamera = new ArcRotateCamera(
       'Camera',
@@ -36,13 +37,14 @@ class App {
       Vector3.Zero(),
       scene
     )
-    camera.position = new Vector3(1, 3.5, -6)
+    camera.position = new Vector3(1, 3.5, 6)
     camera.attachControl(canvas, true)
+    // camera.position = new Vector3(0,3,3)
 
-    createLight(new Vector3(5, 10, 2), scene)
-    createLight(new Vector3(-10, 10, -4), scene)
-    createLight(new Vector3(10, -10, 4), scene)
-    createLight(new Vector3(-10, 10, -4), scene)
+    createLight(new Vector3(1, 3, 2), scene)
+    createLight(new Vector3(-1, 1, -2), scene)
+    createLight(new Vector3(1, -1, 2), scene)
+    createLight(new Vector3(-1, 1, -2), scene)
 
     // var directionalLight = new DirectionalLight("DirectionalLight", new Vector3(0, -1, 1), scene);
     // // directionalLight.diffuse = new Color3(1, 1, );
@@ -54,55 +56,33 @@ class App {
       scene
     )
 
-    light1.intensity = 0.6
-
-    // const box: Mesh = MeshBuilder.CreateBox(
-    //   'box',
-    //   {
-    //     size: 2,
-    //     width: 2,
-    //     height: 2
-    //   },
-    //   scene
-    // )
-    // box.position = lightPosition
-
     addChair(scene).then((chair) => {
-      camera.useFramingBehavior = true
-      camera.setTarget(chair.getChildMeshes()[0])
-      camera.zoomOnFactor = 2
-      camera.zoomOn(chair.getChildMeshes())
+      // camera.useFramingBehavior = true
+      camera.setTarget(chair.getChildMeshes()[1])
+      camera.beta = 0.5
+      camera.radius = 4
+      camera.useAutoRotationBehavior = true
+      // camera.zoomOnFactor = 2
+      // camera.zoomOn(chair.getChildMeshes())
 
-      const frameRate = 10
+      const upholsteryMesh = chair
+        .getChildMeshes()
+        .find((mesh) => mesh.name === 'Upholstery_Mesh')
 
-      const zRotate = new Animation("zRotate", "rotation.y", frameRate, Animation.ANIMATIONTYPE_FLOAT, Animation.ANIMATIONLOOPMODE_CYCLE);
+      const decalMaterial = qiDAOLogo(scene)
+      const location = new Vector3(0.016257147042792963, 0.8948969311723505, -0.3952781182062408)
+      const normal = new Vector3(-0.6308170302018776, 0.5130841740305409, 0.582077748042889)
+      var decalSize = new Vector3(0.25, 0.25, 0.25)
 
-      const keyFrames = []; 
-  
-      keyFrames.push({
-          frame: 0,
-          value: 0
-      });
-  
-      keyFrames.push({
-          frame: frameRate * 300,
-          value: 180
-      });
-  
-      keyFrames.push({
-          frame: 600 * frameRate,
-          value: 0
-      });
-  
-      zRotate.setKeys(keyFrames);
-  
-      chair.animations.push(zRotate);
-  
-      scene.beginAnimation(chair, 0, 600 * frameRate, true);
-
-      // createSpotlight(new Vector3(5, 10, 2), chair.position, scene)
+      /**************************CREATE DECAL*************************************************/
+      var decal = MeshBuilder.CreateDecal('decal', upholsteryMesh, {
+        position: location,
+        normal: normal,
+        size: decalSize
+      })
+      decal.material = decalMaterial
+      decal.parent = upholsteryMesh
     })
-    // scene.debugLayer.show()
 
     // hide/show the Inspector
     window.addEventListener('keydown', (ev) => {

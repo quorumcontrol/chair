@@ -8,8 +8,10 @@ import {
   Texture,
   TransformNode,
   AbstractMesh,
-  Color3
+  Color3,
+  MeshBuilder
 } from '@babylonjs/core'
+import qiDAOLogo from './qiDaoLogo';
 
 function hippoGriffeTexture(scene:Scene) {
   var myMaterial = new StandardMaterial("hippogriffeTexture", scene);
@@ -72,8 +74,6 @@ export async function addChair(scene: Scene) {
         return
     }
   })
-
-  // chair.scaling = new Vector3(0.1, 0.1, 0.1)
 
   return chair
 }
