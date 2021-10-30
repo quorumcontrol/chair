@@ -53,7 +53,7 @@ class App {
     addChair(scene).then((chair) => {
       // camera.useFramingBehavior = true
       camera.setTarget(chair.getChildMeshes()[1])
-      camera.beta = 0.5
+      camera.beta = 0.8
       camera.radius = 4
       camera.useAutoRotationBehavior = true
       // camera.zoomOnFactor = 2

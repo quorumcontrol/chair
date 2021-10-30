@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "Topper Bowers <topper@toppingdesign.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "yarn poi --serve src"
+  },
   "devDependencies": {
     "@babylonjs/core": "^4.2.0",
     "@babylonjs/inspector": "^4.2.0",
