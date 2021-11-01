@@ -9,6 +9,9 @@ import {
   HemisphericLight,
   MeshBuilder,
   GlowLayer,
+  SceneLoader,
+  AnimationPropertiesOverride,
+  Angle
 } from '@babylonjs/core'
 import createEngine from './engineCreator'
 import { addChair } from './chair'
@@ -20,7 +23,8 @@ class App {
     const { engine, canvas } = createEngine()
     var scene = new Scene(engine)
     scene.clearColor = Color3.Black()
-    var gl = new GlowLayer('glow', scene)
+
+    // var gl = new GlowLayer('glow', scene)
 
     var camera: ArcRotateCamera = new ArcRotateCamera(
       'Camera',
@@ -32,12 +36,43 @@ class App {
     )
     camera.position = new Vector3(1, 3.5, 6)
     camera.attachControl(canvas, true)
-    // camera.position = new Vector3(0,3,3)
 
-    createLight(new Vector3(2, 1.5, 1), scene)
-    createLight(new Vector3(-1.5, 1.5, -2), scene)
-    // createLight(new Vector3(1, -1, 2), scene)
-    // createLight(new Vector3(-1, 1, -2), scene)
+    const ground = MeshBuilder.CreateGround("ground", {width:200, height:200});
+
+    SceneLoader.ImportMesh(
+      '',
+      '/assets/glb/',
+      'untitled.babylon',
+      scene,
+      function (newMeshes, particleSystems, skeletons) {
+        console.log('meshes', newMeshes, skeletons)
+        var skeleton = skeletons[0]
+        newMeshes[0].rotation.x = Angle.FromDegrees(-90).radians()
+        newMeshes[0].scaling = new Vector3(0.1,0.1,0.1)
+        camera.setTarget(newMeshes[0])
+
+        // ROBOT
+        // skeleton.animationPropertiesOverride =
+        //   new AnimationPropertiesOverride()
+        // skeleton.animationPropertiesOverride.enableBlending = true
+        // skeleton.animationPropertiesOverride.blendingSpeed = 0.05
+        // skeleton.animationPropertiesOverride.loopMode = 1
+
+        console.log(skeleton.animations)
+
+        var dance = skeleton.getAnimationRange("dance");
+
+        scene.beginAnimation(skeleton, dance.from, dance.to, true);
+
+      }
+    )
+
+    // // camera.position = new Vector3(0,3,3)
+
+    // createLight(new Vector3(2, 1.5, 1), scene)
+    // createLight(new Vector3(-1.5, 1.5, -2), scene)
+    // // createLight(new Vector3(1, -1, 2), scene)
+    // // createLight(new Vector3(-1, 1, -2), scene)
 
     // var directionalLight = new DirectionalLight("DirectionalLight", new Vector3(0, -1, 1), scene);
     // directionalLight.diffuse = new Color3(1, 1, );
@@ -45,52 +80,52 @@ class App {
 
     const light1: HemisphericLight = new HemisphericLight(
       'light1',
-      new Vector3(.25, 1, .25),
+      new Vector3(0.25, 1, 0.25),
       scene
     )
     light1.intensity = 2
 
-    addChair(scene).then((chair) => {
-      // camera.useFramingBehavior = true
-      camera.setTarget(chair.getChildMeshes()[1])
-      camera.beta = 0.8
-      camera.radius = 4
-      camera.useAutoRotationBehavior = true
-      // camera.zoomOnFactor = 2
-      // camera.zoomOn(chair.getChildMeshes())
+    // addChair(scene).then((chair) => {
+    //   // camera.useFramingBehavior = true
+    //   camera.setTarget(chair.getChildMeshes()[1])
+    //   camera.beta = 0.8
+    //   camera.radius = 4
+    //   camera.useAutoRotationBehavior = true
+    //   // camera.zoomOnFactor = 2
+    //   // camera.zoomOn(chair.getChildMeshes())
 
-      const upholsteryMesh = chair
-        .getChildMeshes()
-        .find((mesh) => mesh.name === 'Upholstery_Mesh')
+    //   const upholsteryMesh = chair
+    //     .getChildMeshes()
+    //     .find((mesh) => mesh.name === 'Upholstery_Mesh')
 
-      const decalMaterial = qiDAOLogo(scene)
-      const location = new Vector3(0.016257147042792963, 0.8948969311723505, -0.3952781182062408)
-      const normal = new Vector3(-0.6308170302018776, 0.5130841740305409, 0.582077748042889)
-      var decalSize = new Vector3(0.25, 0.25, 0.25)
+    //   const decalMaterial = qiDAOLogo(scene)
+    //   const location = new Vector3(0.016257147042792963, 0.8948969311723505, -0.3952781182062408)
+    //   const normal = new Vector3(-0.6308170302018776, 0.5130841740305409, 0.582077748042889)
+    //   var decalSize = new Vector3(0.25, 0.25, 0.25)
 
-      /**************************CREATE DECAL*************************************************/
-      var decal = MeshBuilder.CreateDecal('decal', upholsteryMesh, {
-        position: location,
-        normal: normal,
-        size: decalSize
-      })
-      decal.material = decalMaterial
-      decal.parent = upholsteryMesh
-    })
+    //   /**************************CREATE DECAL*************************************************/
+    //   var decal = MeshBuilder.CreateDecal('decal', upholsteryMesh, {
+    //     position: location,
+    //     normal: normal,
+    //     size: decalSize
+    //   })
+    //   decal.material = decalMaterial
+    //   decal.parent = upholsteryMesh
+    // })
 
-    // hide/show the Inspector
-    window.addEventListener('keydown', (ev) => {
-      // Shift+Ctrl+Alt+I
-      if (ev.shiftKey && ev.ctrlKey && ev.altKey && ev.keyCode === 73) {
-        if (scene.debugLayer.isVisible()) {
-          scene.debugLayer.hide()
-        } else {
-          scene.debugLayer.show()
-        }
-      }
-    })
+    // // hide/show the Inspector
+    // window.addEventListener('keydown', (ev) => {
+    //   // Shift+Ctrl+Alt+I
+    //   if (ev.shiftKey && ev.ctrlKey && ev.altKey && ev.keyCode === 73) {
+    //     if (scene.debugLayer.isVisible()) {
+    //       scene.debugLayer.hide()
+    //     } else {
+    //       scene.debugLayer.show()
+    //     }
+    //   }
+    // })
 
-    // run the main render loop
+    // // run the main render loop
     engine.runRenderLoop(() => {
       scene.render()
     })

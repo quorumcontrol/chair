@@ -1,0 +1,112 @@
+Exporter version: 2.93.4, Blender version: 2.93.5
+========= Conversion from Blender to Babylon.js =========
+	Scene settings used :
+		Inline textures     :  false
+		Material Type       :  PBR
+		Positions Precision :  4
+		Normals Precision   :  3
+		UVs Precision       :  3
+		Vert Color Precision:  3
+		Mat Weight Precision:  2
+		Keep Z-up r-handed  :  no
+		Texture directory   :  /Users/tobowers/code/babylon-play/public/assets/test/
+	Python World class constructor completed
+	WARNING: No active camera has been assigned, or is not in a currently enabled collection
+	processing begun of skeleton:  Armature, id:  0
+		processing begun of bone:  Hips, index:  0
+		processing begun of bone:  Spine, index:  1
+		processing begun of bone:  Spine1, index:  2
+		processing begun of bone:  Spine2, index:  3
+		processing begun of bone:  Neck, index:  4
+		processing begun of bone:  Head, index:  5
+		processing begun of bone:  HeadTop_End, index:  6
+		processing begun of bone:  LeftShoulder, index:  7
+		processing begun of bone:  LeftArm, index:  8
+		processing begun of bone:  LeftForeArm, index:  9
+		processing begun of bone:  LeftHand, index:  10
+		processing begun of bone:  LeftHandThumb1, index:  11
+		processing begun of bone:  LeftHandThumb2, index:  12
+		processing begun of bone:  LeftHandThumb3, index:  13
+		processing begun of bone:  LeftHandThumb4, index:  14
+		processing begun of bone:  LeftHandIndex1, index:  15
+		processing begun of bone:  LeftHandIndex2, index:  16
+		processing begun of bone:  LeftHandIndex3, index:  17
+		processing begun of bone:  LeftHandIndex4, index:  18
+		processing begun of bone:  LeftHandMiddle1, index:  19
+		processing begun of bone:  LeftHandMiddle2, index:  20
+		processing begun of bone:  LeftHandMiddle3, index:  21
+		processing begun of bone:  LeftHandMiddle4, index:  22
+		processing begun of bone:  LeftHandRing1, index:  23
+		processing begun of bone:  LeftHandRing2, index:  24
+		processing begun of bone:  LeftHandRing3, index:  25
+		processing begun of bone:  LeftHandRing4, index:  26
+		processing begun of bone:  LeftHandPinky1, index:  27
+		processing begun of bone:  LeftHandPinky2, index:  28
+		processing begun of bone:  LeftHandPinky3, index:  29
+		processing begun of bone:  LeftHandPinky4, index:  30
+		processing begun of bone:  RightShoulder, index:  31
+		processing begun of bone:  RightArm, index:  32
+		processing begun of bone:  RightForeArm, index:  33
+		processing begun of bone:  RightHand, index:  34
+		processing begun of bone:  RightHandIndex1, index:  35
+		processing begun of bone:  RightHandIndex2, index:  36
+		processing begun of bone:  RightHandIndex3, index:  37
+		processing begun of bone:  RightHandIndex4, index:  38
+		processing begun of bone:  RightHandMiddle1, index:  39
+		processing begun of bone:  RightHandMiddle2, index:  40
+		processing begun of bone:  RightHandMiddle3, index:  41
+		processing begun of bone:  RightHandMiddle4, index:  42
+		processing begun of bone:  RightHandRing1, index:  43
+		processing begun of bone:  RightHandRing2, index:  44
+		processing begun of bone:  RightHandRing3, index:  45
+		processing begun of bone:  RightHandRing4, index:  46
+		processing begun of bone:  RightHandPinky1, index:  47
+		processing begun of bone:  RightHandPinky2, index:  48
+		processing begun of bone:  RightHandPinky3, index:  49
+		processing begun of bone:  RightHandPinky4, index:  50
+		processing begun of bone:  RightHandThumb1, index:  51
+		processing begun of bone:  RightHandThumb2, index:  52
+		processing begun of bone:  RightHandThumb3, index:  53
+		processing begun of bone:  RightHandThumb4, index:  54
+		processing begun of bone:  LeftUpLeg, index:  55
+		processing begun of bone:  LeftLeg, index:  56
+		processing begun of bone:  LeftFoot, index:  57
+		processing begun of bone:  LeftToeBase, index:  58
+		processing begun of bone:  LeftToe_End, index:  59
+		processing begun of bone:  RightUpLeg, index:  60
+		processing begun of bone:  RightLeg, index:  61
+		processing begun of bone:  RightFoot, index:  62
+		processing begun of bone:  RightToeBase, index:  63
+		processing begun of bone:  RightToe_End, index:  64
+		processing action Armature|mixamo.com|Layer0:  in[1 - 2], out[0 - 2]
+		processing action Armature|Take 001|Base Layer:  in[0 - 1], out[10 - 11]
+	processing begun of mesh:  Ganfaul
+		processing begun of material:  Ganfaul_Body
+			processing texture Ganfaul_normal
+				texture type:  bumpTexture, mapped using: "map1"
+			processing texture Ganfaul_diffuse
+				texture type:  diffuseTexture, mapped using: "map1"
+			processing texture Ganfaul_specular
+				texture type:  specularTexture, mapped using: "map1"
+			processing texture Ganfaul_glow
+				texture type:  emissiveTexture, mapped using: "map1"
+		Custom split normals with tangents being used
+		num positions      :  10209
+		num normals        :  10209
+		num tangents       :  40836
+		num uvs            :  20418
+		num uvs2           :  20418
+		num colors         :  0
+		num triangles      :  13799
+		Skeleton stats:  
+			Total Influencers:  16320
+			Avg # of influencers per vertex:  1.5986
+			Highest # of influencers observed:  6, num vertices with this:  5
+			exported as 6 influencers
+			num skeletonWeights and skeletonIndices:  81672
+		WARNING: # of 0 area faces found:  1
+========= Writing of JSON file started =========
+	writing mesh:  Ganfaul
+========= Writing of JSON file completed =========
+========= end of processing =========
+elapsed time:  0 min, 6.0627 secs
